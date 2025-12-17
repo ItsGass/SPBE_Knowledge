@@ -55,8 +55,8 @@ Sistem ini dibuat untuk:
 | Role | Deskripsi | Hak Akses |
 |----|----|----|
 | Guest | Pengunjung | Lihat knowledge publik |
-| User | Pengguna terdaftar | Lihat knowledge publik |
-| Verifikator | Pemeriksa konten | Verifikasi knowledge |
+| User | Pengguna terdaftar | Lihat knowledge publik, rating, comment |
+| Verifikator | Pemeriksa konten | Verifikasi knowledge, publikasi knowledge |
 | Admin | Pengelola konten | CRUD knowledge, scope |
 | Super Admin | Pengelola sistem | Full akses |
 
@@ -68,33 +68,6 @@ Semua struktur database dibuat **menggunakan Laravel Migration**, bukan SQL dump
 - Aman di-clone
 - Konsisten antar environment
 - Tidak menyebabkan error `php artisan migrate`
-
-### Daftar Migration
-
-database/migrations/
-├── 0001_01_01_000000_create_users_table.php
-├── 0001_01_01_000001_create_password_reset_tokens_table.php
-├── 0001_01_01_000002_create_sessions_table.php
-├── 2024_01_01_000100_create_statuses_table.php
-├── 2024_01_01_000200_create_scopes_table.php
-├── 2024_01_01_000300_create_tags_table.php
-├── 2024_01_01_000400_create_knowledge_table.php
-├── 2024_01_01_000500_create_knowledge_tags_table.php
-├── 2024_01_01_000600_create_knowledge_comments_table.php
-├── 2024_01_01_000700_create_knowledge_ratings_table.php
-├── 2024_01_01_000800_create_knowledge_views_table.php
-├── 2024_01_01_000900_create_activity_logs_table.php
-├── 2024_01_01_001000_create_admins_table.php
-├── 2024_01_01_001100_create_super_admins_table.php
-└── 2024_01_01_001200_create_verifikator_profiles_table.php
-
-yaml
-Salin kode
-
-✔ Semua relasi menggunakan **foreign key**  
-✔ Urutan migration dijaga agar **tidak error dependency**
-
----
 
 ## 🌱 Seeder (Data Awal)
 
