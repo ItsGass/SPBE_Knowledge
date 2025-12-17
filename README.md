@@ -235,7 +235,7 @@ php artisan serve
 After cloning the repository, create the storage symlink:
 
 bash
-php artisan storage:link
+"php artisan storage:link"
 This is required for:
 
 Thumbnail upload
