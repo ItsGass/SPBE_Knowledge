@@ -21,7 +21,7 @@ class KnowledgeSeeder extends Seeder
             'body' => 'Ini adalah contoh knowledge awal agar aplikasi langsung terlihat hidup.',
             'type' => 'pdf',
             'visibility' => 'public',
-            'user_id' => $user->id,
+            'created_by' => $user->id,
             'scope_id' => $scope->id,
             'status_id' => $status->id,
             'created_at' => now(),

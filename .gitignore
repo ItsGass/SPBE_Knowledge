@@ -1,4 +1,6 @@
+# ======================
 # OS / Editor
+# ======================
 *.log
 .DS_Store
 Thumbs.db
@@ -8,30 +10,47 @@ Thumbs.db
 /.nova
 /.zed
 
+# ======================
 # Environment
+# ======================
 .env
 .env.*
 !.env.example
 /auth.json
 
+# ======================
 # Dependencies
+# ======================
 /vendor
 /node_modules
 
-# Build
+# ======================
+# Build / Vite
+# ======================
 /public/build
 /public/hot
-/public/storage
 
-# Storage
+# ======================
+# Storage (IMPORTANT)
+# ======================
 /storage/*
-!storage/.gitignore
+!/storage/.gitignore
+!/storage/app
+!/storage/framework
+!/storage/framework/cache
+!/storage/framework/sessions
+!/storage/framework/views
+!/storage/logs
 
+# ======================
 # Cache
+# ======================
 .phpunit.result.cache
 /.phpunit.cache
 .phpactor.json
 
+# ======================
 # Homestead
+# ======================
 Homestead.json
 Homestead.yaml

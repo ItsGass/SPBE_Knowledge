@@ -12,13 +12,13 @@ class StatusSeeder extends Seeder
         DB::table('statuses')->insert([
             [
                 'key' => 'draft',
-                'name' => 'Draft',
+                'label' => 'Draft',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'key' => 'verified',
-                'name' => 'Verified',
+                'label' => 'Verified',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
