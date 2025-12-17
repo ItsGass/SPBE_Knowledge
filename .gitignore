@@ -1,0 +1,37 @@
+# OS / Editor
+*.log
+.DS_Store
+Thumbs.db
+/.idea
+/.vscode
+/.fleet
+/.nova
+/.zed
+
+# Environment
+.env
+.env.*
+!.env.example
+/auth.json
+
+# Dependencies
+/vendor
+/node_modules
+
+# Build
+/public/build
+/public/hot
+/public/storage
+
+# Storage
+/storage/*
+!storage/.gitignore
+
+# Cache
+.phpunit.result.cache
+/.phpunit.cache
+.phpactor.json
+
+# Homestead
+Homestead.json
+Homestead.yaml

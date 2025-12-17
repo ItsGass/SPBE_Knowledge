@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   ROOT VARIABLES (LIGHT + DARK MODE)
+   ===================================================== */
+:root{
+  /* ACCENT */
+  --accent: #ffd400;
+  --accent-foreground: #0b0b0b;
+
+  /* LIGHT MODE */
+  --base-light: #e7e4e4;
+  --text-light: #0b1220;
+  --panel-light: #ececec;
+
+  /* DARK MODE  */
+  --base-dark: #1d1c1c;     
+  --panel-dark: #1f1f1f;  
+  --text-dark: #e5e7eb;    
+  --muted: #9ca3af;
+}
+
+/* =====================================================
+   BODY
+   ===================================================== */
+body {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255,212,0,0.06) 0%, rgba(255,212,0,0.04) 6%, transparent 12%),
+    radial-gradient(circle at 90% 80%, rgba(255,212,0,0.05) 0%, rgba(255,212,0,0.03) 8%, transparent 16%),
+    var(--base-light);
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* DARK MODE BODY (MATIIN GRADIENT) */
+.dark body {
+  background: var(--base-dark) !important;
+  color: var(--text-dark);
+}
+
+/* =====================================================
+   BASE HELPERS (MATCH LAYOUT.APP)
+   ===================================================== */
+.bg-base-light { background-color: var(--base-light); }
+.bg-base-dark  { background-color: var(--base-dark); }
+
+.text-text-light { color: var(--text-light); }
+.text-text-dark  { color: var(--text-dark); }
+
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+.container-left {
+  max-width: 1120px;
+  margin-left: 0;
+  margin-right: auto;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+/* =====================================================
+   NAVBAR
+   ===================================================== */
+.header {
+  background: transparent;
+  padding: 18px 0;
+}
+
+.brand {
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.brand-badge {
+  width:48px;
+  height:48px;
+  border-radius:10px;
+  background:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:var(--accent-foreground);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.navcenter { display:flex; gap:20px; align-items:center; justify-content:center; flex:1; }
+.navright  { display:flex; gap:12px; align-items:center; justify-content:flex-end; }
+
+/* =====================================================
+   PANEL / CARD
+   ===================================================== */
+.panel {
+  background: var(--panel-light);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(16,24,40,0.06);
+  border: 1px solid rgba(16,24,40,0.04);
+}
+
+.dark .panel {
+  background: var(--panel-dark);
+  border-color: #2a2a2a;
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(255,212,0,0.18);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(16,24,40,0.12);
+  padding: 9px 12px;
+  border-radius: 12px;
+}
+
+.dark .btn-outline {
+  border-color: #2a2a2a;
+}
+
+/* =====================================================
+   HEADINGS
+   ===================================================== */
+.h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.dark .h1 {
+  color: var(--text-dark);
+}
+
+.h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+/* =====================================================
+   FORM INPUT
+   ===================================================== */
+.input {
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid rgba(16,24,40,0.12);
+  background:#fff;
+}
+
+.dark .input {
+  background:#1f1f1f;
+  border-color:#2a2a2a;
+  color: var(--text-dark);
+}
+
+/* =====================================================
+   SELECT (HILANGKAN BIRU TOTAL)
+   ===================================================== */
+select {
+  background-color: #1f1f1f !important;
+  color: #ffffff !important;
+  border-color: #2a2a2a !important;
+  accent-color: var(--accent);
+}
+
+select option {
+  background-color: #1f1f1f !important;
+  color: #ffffff !important;
+}
+
+select option:hover,
+select option:active,
+select option:focus {
+  background-color: #2a2a2a !important;
+  color: var(--accent) !important;
+}
+
+select option:checked {
+  background-color: #2a2a2a !important;
+  color: var(--accent) !important;
+}
+
+select:focus {
+  outline: none !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px rgba(255,212,0,0.45) !important;
+}
+
+/* =====================================================
+   UTILITIES
+   ===================================================== */
+.muted { color: var(--muted); }
+
+.grid-3 {
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:16px;
+}
+
+@media (max-width: 980px) {
+  .grid-3 { grid-template-columns: 1fr; }
+}
