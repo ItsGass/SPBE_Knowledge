@@ -230,7 +230,19 @@ php artisan migrate --seed
 6️⃣ Jalankan Aplikasi
 php artisan serve
 
+## Storage Setup (Required)
 
+After cloning the repository, create the storage symlink:
+
+bash
+php artisan storage:link
+This is required for:
+
+Thumbnail upload
+
+File attachment
+
+Public assets stored in storage/app/public
 Akses aplikasi melalui browser:
 
 http://127.0.0.1:8000
