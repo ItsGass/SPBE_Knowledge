@@ -44,7 +44,7 @@
     </script>
     
     <!-- Kartu Konten Utama -->
-    <div class="bg-white dark:bg-base-dark/80 p-6 sm:p-8 rounded-2xl shadow-xl dark:shadow-2xl dark:shadow-poco-900/50 transition-all duration-500">
+    <div class="bg-white dark:bg-base-dark p-6 sm:p-8 rounded-2xl shadow-xl dark:shadow-2xl dark:shadow-poco-900/50 transition-all duration-500">
     
         {{-- Header dan Tombol Tambah --}}
         <div class="flex justify-between items-center pb-4 mb-6 border-b border-gray-100 dark:border-poco-900">

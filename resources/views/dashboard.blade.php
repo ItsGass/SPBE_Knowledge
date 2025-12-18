@@ -4,7 +4,7 @@
 <div class="max-w-7xl mx-auto">
     
     <!-- Bagian Utama (Halo Pengguna & Ringkasan) -->
-    <div class="bg-white dark:bg-base-dark/80 p-6 sm:p-8 rounded-2xl shadow-xl dark:shadow-2xl dark:shadow-poco-900/50 transition-all duration-500">
+    <div class="bg-white dark:bg-base-dark p-6 sm:p-8 rounded-2xl shadow-xl dark:shadow-2xl dark:shadow-poco-900/50 transition-all duration-500">
         
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
             

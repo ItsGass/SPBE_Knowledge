@@ -66,7 +66,7 @@
                         $statusLabel = optional($knowledge->status)->label ?? 'Draft';
                     @endphp
 
-                    <div class="bg-white dark:bg-base-dark/80 rounded-2xl
+                    <div class="bg-white dark:bg-base-dark rounded-2xl
                                 overflow-hidden shadow-soft dark:shadow-xl
                                 flex flex-col">
 

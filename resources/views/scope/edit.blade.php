@@ -8,7 +8,7 @@
     </h1>
 
     <!-- Kartu Formulir -->
-    <div class="bg-white dark:bg-base-dark/80 p-6 sm:p-8 rounded-2xl shadow-xl dark:shadow-2xl dark:shadow-poco-900/50 transition-all duration-500">
+    <div class="bg-white dark:bg-base-dark p-6 sm:p-8 rounded-2xl shadow-xl dark:shadow-2xl dark:shadow-poco-900/50 transition-all duration-500">
         
         <form action="{{ route('scope.update', $scope->id) }}" method="POST" class="space-y-6">
             @csrf

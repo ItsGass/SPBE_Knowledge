@@ -8,7 +8,7 @@
         Edit Knowledge
     </h1>
 
-    <div class="bg-white dark:bg-base-dark/80 p-6 sm:p-8 rounded-2xl
+    <div class="bg-white dark:bg-base-dark p-6 sm:p-8 rounded-2xl
                 shadow-xl dark:shadow-2xl dark:shadow-poco-900/50 transition-all duration-500">
 
         {{-- ================= ERROR ================= --}}
@@ -66,7 +66,7 @@
                               border border-gray-300 dark:border-gray-700
                               bg-gray-50 dark:bg-base-dark
                               focus:ring-2 focus:ring-poco-500 focus:border-poco-500">
-                <p class="text-xs text-muted mt-1">Pisahkan dengan koma</p>
+                <p class="text-xs text-muted mt-1">Pisahkan dengan koma jika ingin dua tag atau lebih</p>
             </div>
 
             {{-- ================= TYPE ================= --}}

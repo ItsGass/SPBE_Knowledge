@@ -32,6 +32,73 @@
         }
     </script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+    /* ===============================
+       ABSTRACT BUBBLES BACKGROUND
+    =============================== */
+    .bubbles-bg {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        z-index: -1; /* penting: di belakang semua konten */
+        pointer-events: none;
+        filter: blur(1px);
+        opacity: 0.85;
+    }
+
+    .bubble {
+        position: absolute;
+        bottom: -200px;
+        background: rgba(255, 212, 0, 0.35);
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(255, 212, 0, 0.6);
+        animation: animateBubble linear infinite;
+        will-change: transform, opacity;
+    }
+
+    @keyframes animateBubble {
+        from {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0.8;
+        }
+        to {
+            transform: translateY(-1200px) rotate(720deg);
+            opacity: 0;
+        }
+    }
+
+    /* Dark mode */
+    .dark .bubble {
+        background: rgba(59, 130, 246, 0.25);
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+    }
+
+    /* Abstract distribution (20 bubble, no overlap) */
+    .bubble:nth-child(1)  { left: 5%;  width: 18px; height: 18px; animation-duration: 14s; animation-delay: -2s; }
+    .bubble:nth-child(2)  { left: 12%; width: 32px; height: 32px; animation-duration: 18s; animation-delay: -8s; }
+    .bubble:nth-child(3)  { left: 20%; width: 22px; height: 22px; animation-duration: 12s; animation-delay: -4s; }
+    .bubble:nth-child(4)  { left: 28%; width: 55px; height: 55px; animation-duration: 22s; animation-delay: -12s; }
+    .bubble:nth-child(5)  { left: 36%; width: 26px; height: 26px; animation-duration: 16s; animation-delay: -6s; }
+
+    .bubble:nth-child(6)  { left: 44%; width: 20px; height: 20px; animation-duration: 13s; animation-delay: -9s; }
+    .bubble:nth-child(7)  { left: 52%; width: 38px; height: 38px; animation-duration: 19s; animation-delay: -3s; }
+    .bubble:nth-child(8)  { left: 60%; width: 24px; height: 24px; animation-duration: 15s; animation-delay: -11s; }
+    .bubble:nth-child(9)  { left: 68%; width: 60px; height: 60px; animation-duration: 24s; animation-delay: -7s; }
+    .bubble:nth-child(10) { left: 75%; width: 28px; height: 28px; animation-duration: 17s; animation-delay: -14s; }
+
+    .bubble:nth-child(11) { left: 82%; width: 22px; height: 22px; animation-duration: 14s; animation-delay: -5s; }
+    .bubble:nth-child(12) { left: 88%; width: 40px; height: 40px; animation-duration: 20s; animation-delay: -10s; }
+    .bubble:nth-child(13) { left: 92%; width: 18px; height: 18px; animation-duration: 12s; animation-delay: -1s; }
+    .bubble:nth-child(14) { left: 15%; width: 48px; height: 48px; animation-duration: 21s; animation-delay: -16s; }
+    .bubble:nth-child(15) { left: 33%; width: 30px; height: 30px; animation-duration: 16s; animation-delay: -13s; }
+
+    .bubble:nth-child(16) { left: 47%; width: 22px; height: 22px; animation-duration: 14s; animation-delay: -6s; }
+    .bubble:nth-child(17) { left: 58%; width: 36px; height: 36px; animation-duration: 18s; animation-delay: -9s; }
+    .bubble:nth-child(18) { left: 66%; width: 26px; height: 26px; animation-duration: 15s; animation-delay: -4s; }
+    .bubble:nth-child(19) { left: 73%; width: 50px; height: 50px; animation-duration: 22s; animation-delay: -11s; }
+    .bubble:nth-child(20) { left: 90%; width: 20px; height: 20px; animation-duration: 13s; animation-delay: -8s; }
+</style>
+
 </head>
 
 <!-- Terapkan tema dasar: Light Mode (Putih-Hitam) vs Dark Mode (Hitam-Putih) -->
@@ -39,7 +106,29 @@
              bg-base-light text-text-light 
              dark:bg-base-dark dark:text-text-dark 
              transition-colors duration-500">
-
+    <ul class="bubbles-bg">
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    
+</ul>
     <!-- HEADER (NAVIGASI ATAS) -->
     <header class="sticky top-0 z-40 
                    bg-white/95 dark:bg-base-dark/95 
@@ -68,11 +157,22 @@
                 <a href="{{ route('dashboard') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">Dashboard</a>
                 <a href="{{ route('knowledge.index') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">Knowledge</a>
                 @auth
-                    @if(in_array(auth()->user()->role, ['admin', 'super_admin']))
-                        <a href="{{ route('scope.index') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">Scope</a>
-                        <a href="{{ route('tags.index') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">Tags</a>
+                    {{-- Tags boleh untuk admin, super_admin, dan user --}}
+@if(in_array(auth()->user()->role, ['admin', 'super_admin', 'user']))
+    <a href="{{ route('tags.index') }}"
+       class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">
+        Tags
+    </a>
+@endif
 
-                     @endif
+{{-- Scope tetap admin-only --}}
+@if(in_array(auth()->user()->role, ['admin', 'super_admin']))
+    <a href="{{ route('scope.index') }}"
+       class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">
+        Scope
+    </a>
+@endif
+
                     @if(auth()->user()->role === 'super_admin')
                         <a href="{{ route('user-management.index') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">User Management</a>
                         <a href="{{ route('activity.logs') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">Activity Logs</a>

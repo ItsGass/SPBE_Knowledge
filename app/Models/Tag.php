@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -8,10 +9,9 @@ class Tag extends Model
 {
     protected $fillable = ['name','slug'];
 
-    // jika ingin otomatis atur timestamp
     public $timestamps = true;
 
-    // agar Route Model Binding memakai 'slug' bukan id
+    // Route Model Binding pakai slug
     public function getRouteKeyName()
     {
         return 'slug';
@@ -20,12 +20,34 @@ class Tag extends Model
     // relation ke Knowledge
     public function knowledges(): BelongsToMany
     {
-        return $this->belongsToMany(\App\Models\Knowledge::class, 'knowledge_tags', 'tag_id', 'knowledge_id')->withTimestamps();
+        return $this->belongsToMany(
+            \App\Models\Knowledge::class,
+            'knowledge_tags',
+            'tag_id',
+            'knowledge_id'
+        )->withTimestamps();
     }
 
     // helper: tampilkan dengan '#'
     public function getDisplayAttribute(): string
     {
         return '#' . $this->name;
+    }
+
+    /**
+     * =========================
+     * FIX 3 — SINGLE SOURCE COUNT
+     * =========================
+     * Hitung jumlah knowledge VALID (public + verified)
+     * TANPA menyentuh database
+     */
+    public function scopeWithValidKnowledgeCount($query)
+    {
+        return $query->withCount([
+            'knowledges as count' => function ($q) {
+                $q->where('visibility', 'public')
+                  ->whereHas('status', fn ($s) => $s->where('key', 'verified'));
+            }
+        ]);
     }
 }

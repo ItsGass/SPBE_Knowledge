@@ -91,7 +91,7 @@
                                      px-2 py-0.5 rounded-full
                                      bg-poco-100 text-poco-700
                                      group-hover:bg-black group-hover:text-poco-400">
-                            {{ $tag->count }}
+                            {{ $tag->knowledge_count }}
                         </span>
                     </a>
                 @endforeach

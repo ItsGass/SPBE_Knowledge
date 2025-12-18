@@ -6,6 +6,73 @@
     <title>{{ config('app.name','SPBE') }}</title>
 
     @vite(['resources/css/app.css'])
+    <style>
+    /* ===============================
+       ABSTRACT BUBBLES BACKGROUND
+    =============================== */
+    .bubbles-bg {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        z-index: -1; /* penting: di belakang semua konten */
+        pointer-events: none;
+        
+        opacity: 0.85;
+    }
+
+    .bubble {
+        position: absolute;
+        bottom: -200px;
+        background: rgba(255, 212, 0, 0.35);
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(255, 212, 0, 0.6);
+        animation: animateBubble linear infinite;
+        will-change: transform, opacity;
+    }
+
+    @keyframes animateBubble {
+        from {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0.8;
+        }
+        to {
+            transform: translateY(-1200px) rotate(720deg);
+            opacity: 0;
+        }
+    }
+
+    /* Dark mode */
+    .dark .bubble {
+        background: rgba(59, 130, 246, 0.25);
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+    }
+
+    /* Abstract distribution (20 bubble, no overlap) */
+.bubble:nth-child(1)  { left: 5%;  width: 45px;  height: 45px;  animation-duration: 16s; animation-delay: -2s; }
+.bubble:nth-child(2)  { left: 12%; width: 80px;  height: 80px;  animation-duration: 20s; animation-delay: -8s; }
+.bubble:nth-child(3)  { left: 20%; width: 60px;  height: 60px;  animation-duration: 14s; animation-delay: -4s; }
+.bubble:nth-child(4)  { left: 28%; width: 130px; height: 130px; animation-duration: 26s; animation-delay: -12s; }
+.bubble:nth-child(5)  { left: 36%; width: 75px;  height: 75px;  animation-duration: 18s; animation-delay: -6s; }
+
+.bubble:nth-child(6)  { left: 44%; width: 55px;  height: 55px;  animation-duration: 15s; animation-delay: -9s; }
+.bubble:nth-child(7)  { left: 52%; width: 100px; height: 100px; animation-duration: 22s; animation-delay: -3s; }
+.bubble:nth-child(8)  { left: 60%; width: 65px;  height: 65px;  animation-duration: 17s; animation-delay: -11s; }
+.bubble:nth-child(9)  { left: 68%; width: 160px; height: 160px; animation-duration: 30s; animation-delay: -7s; }
+.bubble:nth-child(10) { left: 75%; width: 85px;  height: 85px;  animation-duration: 19s; animation-delay: -14s; }
+
+.bubble:nth-child(11) { left: 82%; width: 60px;  height: 60px;  animation-duration: 16s; animation-delay: -5s; }
+.bubble:nth-child(12) { left: 88%; width: 115px; height: 115px; animation-duration: 24s; animation-delay: -10s; }
+.bubble:nth-child(13) { left: 92%; width: 50px;  height: 50px;  animation-duration: 14s; animation-delay: -1s; }
+.bubble:nth-child(14) { left: 15%; width: 140px; height: 140px; animation-duration: 28s; animation-delay: -16s; }
+.bubble:nth-child(15) { left: 33%; width: 90px;  height: 90px;  animation-duration: 20s; animation-delay: -13s; }
+
+.bubble:nth-child(16) { left: 47%; width: 65px;  height: 65px;  animation-duration: 16s; animation-delay: -6s; }
+.bubble:nth-child(17) { left: 58%; width: 95px;  height: 95px;  animation-duration: 21s; animation-delay: -9s; }
+.bubble:nth-child(18) { left: 66%; width: 75px;  height: 75px;  animation-duration: 18s; animation-delay: -4s; }
+.bubble:nth-child(19) { left: 73%; width: 145px; height: 145px; animation-duration: 26s; animation-delay: -11s; }
+.bubble:nth-child(20) { left: 90%; width: 58px;  height: 58px;  animation-duration: 15s; animation-delay: -8s; }
+
+</style>
 
     <script>
         try {
@@ -35,6 +102,30 @@
              bg-base-light text-text-light
              dark:bg-base-dark dark:text-text-dark
              transition-colors duration-500">
+             
+    <ul class="bubbles-bg">
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+    <li class="bubble"></li>
+</ul>
 
     <header class="sticky top-0 z-40
                    bg-white/95 dark:bg-base-dark/95
@@ -61,12 +152,12 @@
             <nav class="hidden md:flex items-center space-x-6 text-sm" aria-label="Top Navigation">
                 
                 @auth
-                    <a href="{{ route('knowledge.index') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">Knowledge</a>
+                    <a href="{{ route('dashboard') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">Dashboard</a>
                     @if(in_array(auth()->user()->role, ['admin','super_admin','verifikator']))
-                        <a href="{{ route('knowledge.create') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">Buat</a>
+                       {{-- <a href="{{ route('knowledge.create') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">Create</a>
                     @endif
                     @if(in_array(auth()->user()->role, ['admin','super_admin']))
-                        <a href="{{ route('scope.index') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">Scope</a>
+                        <a href="{{ route('scope.index') }}" class="text-muted dark:text-gray-400 hover:text-poco-600 dark:hover:text-poco-400 transition-colors font-medium">Scope</a>--}}
                     @endif
                 @endauth
             </nav>
@@ -91,7 +182,7 @@
                 {{-- Auth buttons --}}
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="px-4 py-2 rounded-xl text-sm font-medium text-text-light/80 dark:text-text-dark/80 hover:text-poco-600 dark:hover:text-poco-400">Dashboard</a>
+                        {{--<a href="{{ url('/dashboard') }}" class="px-4 py-2 rounded-xl text-sm font-medium text-text-light/80 dark:text-text-dark/80 hover:text-poco-600 dark:hover:text-poco-400">Dashboard</a>--}}
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
                             <button type="submit"
@@ -346,7 +437,7 @@
                                     $type = $k->type ?? 'pdf';
                                 @endphp
 
-                                <div class="bg-white dark:bg-base-dark/80 rounded-2xl overflow-hidden
+                                <div class="bg-white dark:bg-base-dark rounded-2xl overflow-hidden
                                             shadow-soft dark:shadow-xl flex flex-col">
 
                                     {{-- THUMBNAIL (HANYA DARI DATABASE) --}}
@@ -418,7 +509,7 @@
             @endif
 
             {{-- Tips / small content --}}
-            <div class="mt-10 bg-white dark:bg-base-dark/90 rounded-xl p-6 shadow-sm">
+            <div class="mt-10 bg-white dark:bg-base-dark rounded-xl p-6 shadow-sm">
                 <h3 class="text-sm font-semibold text-text-light dark:text-text-dark mb-2">Catatan</h3>
                 <ul class="list-disc list-inside text-sm text-muted dark:text-gray-400 space-y-1">
                     <li>Informasi publik hanya terlihat jika sudah diverifikasi.</li>

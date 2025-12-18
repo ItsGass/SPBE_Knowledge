@@ -14,7 +14,7 @@
 
 
     {{-- ================= CARD ================= --}}
-    <div class="bg-white dark:bg-base-dark/80 p-6 sm:p-8 rounded-2xl
+    <div class="bg-white dark:bg-base-dark p-6 sm:p-8 rounded-2xl
                 shadow-xl dark:shadow-2xl dark:shadow-poco-900/50 transition-all">
 
         {{-- ================= TITLE & META ================= --}}
@@ -138,23 +138,48 @@
         @include('knowledge.partials.comments')
 
         {{-- ================= VERIFY & TOGGLE VISIBILITY ================= --}}
-        @can('verify', $knowledge)
-    <div class="flex gap-2">
-        <form method="POST" action="{{ route('knowledge.verify', $knowledge) }}">
+@can('verify', $knowledge)
+    <div class="flex items-center gap-3">
+
+        {{-- STATUS VERIFIED --}}
+        @if(optional($knowledge->status)->key === 'verified')
+            <span class="inline-flex items-center gap-2
+                         px-4 py-2 rounded-xl
+                         bg-green-100 text-green-800
+                         dark:bg-green-900/30 dark:text-green-300
+                         font-bold text-sm">
+                ✅ Terverifikasi
+            </span>
+        @else
+            {{-- BUTTON VERIFY --}}
+            <form method="POST" action="{{ route('knowledge.verify', $knowledge) }}">
+                @csrf
+                <button
+                    class="inline-flex items-center gap-2
+                           px-4 py-2 rounded-xl
+                           bg-green-600 hover:bg-green-700
+                           text-white font-bold transition">
+                    ✔ Verifikasi
+                </button>
+            </form>
+        @endif
+
+        {{-- TOGGLE VISIBILITY (TETAP ADA) --}}
+        <form method="POST" action="{{ route('knowledge.toggleVisibility', $knowledge) }}">
             @csrf
-            <button class="px-4 py-2 rounded-xl bg-green-600 text-white">
-                Verifikasi
+            <button
+                class="px-4 py-2 rounded-xl
+                       bg-blue-600 hover:bg-blue-700
+                       text-white font-bold transition">
+                {{ $knowledge->visibility === 'public'
+                    ? 'Jadikan Internal'
+                    : 'Publikasikan' }}
             </button>
         </form>
 
-        <form method="POST" action="{{ route('knowledge.toggleVisibility', $knowledge) }}">
-            @csrf
-            <button class="px-4 py-2 rounded-xl bg-blue-600 text-white">
-                {{ $knowledge->visibility === 'public' ? 'Jadikan Internal' : 'Publikasikan' }}
-            </button>
-        </form>
     </div>
 @endcan
+
 
 
         {{-- ================= ACTION ================= --}}

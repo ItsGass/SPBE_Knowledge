@@ -14,20 +14,45 @@ class TagController extends Controller
      */
     public function index(Request $request)
 {
+    $user = auth()->user();
+
     $q = Tag::query();
 
     if ($request->filled('q')) {
-        $term = strtolower(trim($request->input('q')));
+        $term = trim($request->input('q'));
         $q->where('name', 'like', "%{$term}%");
     }
 
-    // hanya tag yang punya relasi knowledge
-    $q->whereHas('knowledges');
+    $q->withCount([
+        'knowledges as knowledge_count' => function ($qq) use ($user) {
 
-    $tags = $q->orderByDesc('count')->orderBy('name')->paginate(50);
+            // GUEST → hanya public + verified
+            if (! $user) {
+                $qq->where('visibility', 'public')
+                   ->whereHas('status', fn ($s) => $s->where('key', 'verified'));
+                return;
+            }
+
+            // USER → public + internal, tapi HARUS verified
+            if ($user->role === 'user') {
+                $qq->whereHas('status', fn ($s) => $s->where('key', 'verified'));
+                return;
+            }
+
+            // ADMIN / VERIFIKATOR → lihat semua (termasuk draft)
+        }
+    ])
+    ->having('knowledge_count', '>', 0)
+    ->orderByDesc('knowledge_count')
+    ->orderBy('name');
+
+    $tags = $q->paginate(50);
 
     return view('tags.index', compact('tags'));
 }
+
+
+
 
 
     /**
@@ -75,19 +100,26 @@ class TagController extends Controller
      * Returns: [{id,name,slug,count}, ...]
      */
     public function search(Request $request)
-    {
-        $term = (string) $request->input('q', '');
-        $term = trim(strtolower($term));
+{
+    $term = trim((string) $request->input('q', ''));
 
-        if ($term === '') {
-            $results = Tag::orderByDesc('count')->limit(20)->get(['id','name','slug','count']);
-        } else {
-            $results = Tag::where('name', 'like', "{$term}%")
-                          ->orderByDesc('count')
-                          ->limit(20)
-                          ->get(['id','name','slug','count']);
+    $q = Tag::withCount([
+        'knowledges as count' => function ($qq) {
+            $qq->where('visibility', 'public')
+               ->whereHas('status', fn ($s) => $s->where('key', 'verified'));
         }
+    ]);
 
-        return response()->json($results);
+    if ($term !== '') {
+        $q->where('name', 'like', "{$term}%");
     }
+
+    return response()->json(
+        $q->having('count', '>', 0)
+          ->orderByDesc('count')
+          ->limit(20)
+          ->get(['id','name','slug'])
+    );
+}
+
 }

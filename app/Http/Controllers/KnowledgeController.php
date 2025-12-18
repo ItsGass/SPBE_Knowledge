@@ -192,7 +192,7 @@ public function edit(Knowledge $knowledge)
 
             'type'        => 'required|in:pdf,video',
 
-            'attachment'  => 'nullable|required_if:type,pdf|file|mimes:pdf|max:10240',
+            'attachment'  => 'nullable|file|mimes:pdf|max:10240',
             'youtube_url' => 'nullable|required_if:type,video|url',
             'thumbnail'   => 'nullable|image|max:2048',
 
